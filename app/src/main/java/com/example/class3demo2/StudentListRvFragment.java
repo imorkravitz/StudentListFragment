@@ -73,6 +73,7 @@ public class StudentListRvFragment extends Fragment {
         TextView idTv;
         CheckBox cb;
 
+
         public MyViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
             nameTv = itemView.findViewById(R.id.listrow_name_tv);
