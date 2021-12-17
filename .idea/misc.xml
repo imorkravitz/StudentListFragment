@@ -7,11 +7,15 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_student_list.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_student_list_rv_acivity.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_about.xml" value="0.2477355072463768" />
         <entry key="app/src/main/res/layout/fragment_blue.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_red.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_student_details.xml" value="0.21621621621621623" />
         <entry key="app/src/main/res/layout/fragment_student_list.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_students_list.xml" value="0.2477355072463768" />
         <entry key="app/src/main/res/layout/student_list_row.xml" value="0.25" />
+        <entry key="app/src/main/res/menu/base_menu.xml" value="0.33" />
+        <entry key="app/src/main/res/menu/student_list_menu.xml" value="0.32135416666666666" />
       </map>
     </option>
   </component>

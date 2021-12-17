@@ -4,15 +4,20 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.class3demo2.model.Model;
@@ -40,17 +45,26 @@ public class StudentListRvFragment extends Fragment {
 
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onItemClick(int position) {
-                Log.d("TAG","row was clicked " + position);
-                String id = data.get(position).getId();
-                StudentDetailsFragment frag = StudentDetailsFragment.newInstance(id);
-                FragmentTransaction tran = getParentFragmentManager().beginTransaction();
-                tran.add(R.id.base_frag_container,frag);
-                tran.addToBackStack("");
-                tran.commit();
-
+            public void onItemClick(View v, int position) {
+//                Log.d("TAG","row was clicked " + position); //TODO: class 5
+//                String id = data.get(position).getId();
+//                StudentDetailsFragment frag = StudentDetailsFragment.newInstance(id);
+//                FragmentTransaction tran = getParentFragmentManager().beginTransaction();
+//                tran.add(R.id.base_frag_container,frag);
+//                tran.addToBackStack("");
+//                tran.commit();
+                String stId = data.get(position).getId();
+                Navigation.findNavController(v).navigate(StudentListRvFragmentDirections.actionStudentListRvFragmentToStudentDetailsFragment(stId));
             }
         });
+        // for the + Button going to the forward screen
+        ImageButton add = view.findViewById(R.id.studentlist_add_btn);
+//        add.setOnClickListener((v)->{
+//            Navigation.findNavController(v).navigate(R.id.action_studentListRvFragment_to_studentDetailsFragment);
+//        });
+        add.setOnClickListener(Navigation.createNavigateOnClickListener(StudentDetailsFragmentDirections.actionGlobalAboutFragment()));
+        //TODO: MARK
+        setHasOptionsMenu(true); // מבחינת אנדרואיד אנדרואיד יודע שלפרגמנט הזה יש menu
         return view;
     }
 
@@ -68,14 +82,14 @@ public class StudentListRvFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
-                    listener.onItemClick(pos);
+                    listener.onItemClick(v, pos);
                 }
             });
         }
     }
 
     interface OnItemClickListener{
-        void onItemClick(int position);
+        void onItemClick(View v, int position);
     }
     class MyAdapter extends RecyclerView.Adapter<MyViewHolder>{
 
@@ -103,6 +117,22 @@ public class StudentListRvFragment extends Fragment {
         @Override
         public int getItemCount() {
             return data.size();
+        }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.student_list_menu,menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId()==R.id.menu_add) {
+            Log.d("TAG", "Add...");
+                    return true;
+        }else{
+            return super.onOptionsItemSelected(item);
         }
     }
 }
